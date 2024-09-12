@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Profile Cards</title>
+
+    <!-- External Font and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="stylesheets/style.css" />
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0b0c10 ;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            z-index: 1;
+        }
+        section{
+            margin-top: 0px;
+            background-color:  #171623;
+        }
+
+        section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            /* max-width: 1200px; */            
+            z-index: 1;
+        }
+
+        section::before,
+        section::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        section::before {
+            background: linear-gradient(#f00, #f0f);
+            clip-path: circle(30% at right 70%);
+            
+        }
+
+        section::after {
+            background: linear-gradient(#2196f3, #e91e63);
+            clip-path: circle(20% at 10% 10%);
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0px;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .card:hover {
+            box-shadow: 0px 0px 8px white, 0px 0px 18px aqua;
+        }
+
+        .card .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .card .imgBx {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 7px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.5s;
+        }
+
+        .card .imgBx:hover {
+            box-shadow: 0px 0px 8px white, 0px 0px 18px aqua;
+            transform: scale(1.5);
+            transition: transform 0.5s
+        }
+
+        .card .imgBx:hover~.contentBox {
+            transform: translateY(25px);
+            transition: transform 0.5s;
+            
+        }
+
+        .card .imgBx img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card .contentBox h3 {
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
+        .card .contentBox h3 span {
+            font-size: 12px;
+            font-weight: 300;
+            text-transform: capitalize;
+        }
+
+        .card .sci {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+        }
+
+        .card .sci li {
+            list-style: none;
+            margin: 0 10px;
+            transform: translateY(40px);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        .card:hover .sci li {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .card .sci li a {
+            color: #fff;
+            font-size: 24px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+                max-width: 300px;
+                margin: 10px 0;
+            }
+
+            .card .contentBox h3 {
+                font-size: 16px;
+            }
+
+            .card .imgBx {
+                width: 120px;
+                height: 120px;
+            }
+
+            .card .sci li a {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header class="header">
+<a href="index.html" class="logo">CESA</a>
+<!-- <button onclick="Toggle()" id="menu-btn">O</button> -->
+<i class='bx bx-menu' onclick="Toggle()" id="menu-icon"></i>
+<nav class="navbar" id="nav">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+        <a href="index.html#events" class="nav-btn">Event</a>
+        <div class="dropdown-content">
+            <a href="culevent.html">&nbsp<i class='bx bxs-music'></i>&nbspCultural</a>
+            <a href="techevent.html">&nbsp<i class='bx bx-code-alt'></i>&nbspTechnical</a>
+            <a href="sportevent.html">&nbsp<i class='bx bx-trophy'></i>&nbspSports</a>
+        </div>
+    </div>
+    <a href="team.html">Team</a>
+    <a href="#footer">Contact</a>
+</nav>
+</header>
+    <main >
+        <!-- Faculty Section -->
+        <section>
+            <h2>FACULTY ADVISOR</h2>
+            <div class="container">
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/chetan aher.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Dr. Chetna N. Aher<br></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Core Team</h2>
+            <div class="container">
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/core/snigdha de-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Snigdha De<br> <span>President</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/snigdha_de14"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/snigdha-de-b8860127a/"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\core\IMG-20240107-WA0009 - Atharv Diwan-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Atharva Diwan<br> <span>Vice President</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/_atharv_44"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/atharvdiwan?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/core/Kaustaub.jpg" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Kaustubha Khandagale<br> <span>General Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/kaustubhakhandagale?igsh=aWRkcWxzYnNuMndq"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/kaustubha-khandagale-70b216233?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div><div class="card">
+                <div class="content">
+                    <div class="imgBx">
+                        <img src="images\pics\core\1698337906720 - hiten ghadge-modified.png" alt="profile image">
+                    </div>
+                    <div class="contentBox">
+                        <h3>Hiten Ghadge<br> <span>General Secretary</span></h3>
+                    </div>
+                    <ul class="sci">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/hiten_oo7?igsh=MWhoNnU0Zmw1cHpxdw=="><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/hiten-ghadge-a8229b284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div><div class="card">
+            <div class="content">
+                <div class="imgBx">
+                    <img src="images/pics/core/rishika kavade-modified.png" alt="profile image">
+                </div>
+                <div class="contentBox">
+                    <h3>Rishika Kavade<br> <span>Joint Secretary</span></h3>
+                </div>
+                <ul class="sci">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.instagram.com/rishika_k_"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/rishika-kavade-781a5322a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div><div class="card">
+        <div class="content">
+            <div class="imgBx">
+                <img src="images\pics\core\IMG-20240823-WA0007 - Megh Kashilkar-modified.png" alt="profile image">
+            </div>
+            <div class="contentBox">
+                <h3>Megh Kashilkar<br> <span>Treasurer</span></h3>
+            </div>
+            <ul class="sci">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://www.instagram.com/megh._.k?igsh=czBoZTJkNTQwcHUw"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="http://www.linkedin.com/in/megh-kashilkar-2aa36124a"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </div><div class="card">
+    <div class="content">
+        <div class="imgBx">
+            <img src="images\pics\core\IMG-20240820-WA0037-02 - Prajyot Jagtap-modified.png" alt="profile image">
+        </div>
+        <div class="contentBox">
+            <h3>Prajyot Jagtap<br> <span>Treasurer</span></h3>
+        </div>
+        <ul class="sci">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/prajyottt_12_?igsh=MWMwbHgzYmJkcnJveA=="><i class="fa fa-instagram"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/prajyot-jagtap-225155302?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+    </div>
+</div><div class="card">
+<div class="content">
+    <div class="imgBx">
+        <img src="images\pics\core\IMG_2239 - SURYAWANSHI ADITYA-modified.png" alt="profile image">
+    </div>
+    <div class="contentBox">
+        <h3>Aditya Suryawanshi<br> <span>Administrator</span></h3>
+    </div>
+    <ul class="sci">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com/aditya_4103?igsh=MTNzN2czMGczdHdiNA=="><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/aditya-suryawanshi-8b9764229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+</div>
+</div><div class="card">
+<div class="content">
+    <div class="imgBx">
+        <img src="images/pics/core/WhatsApp Image 2024-09-11 at 23.37.40_973e4e7c.jpg" alt="profile image">
+    </div>
+    <div class="contentBox">
+        <h3>Prasad Jadhav<br> <span>Administrator</span></h3>
+    </div>
+    <ul class="sci">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com/_.prasad.jadhav_"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/prasad-jadhav-a401ba251?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+</div>
+</div>
+
+            </div>
+        </section>
+                  
+        <section>
+            <h2>Techinical Team</h2>
+            <div class="container">
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\tech\IMG_20240821_215615 - Soham Mistry-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Soham Mistry<br> <span>Technical Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/_sohammm_01_?igsh=MTdlbXdtY3g4cXpjcA=="><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/soham-mistry-4b1757257"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/tech/Yash divekar.jpg"  alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Yash Divekar<br> <span>Technical Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/d_yash19?igsh=NTc4MTIwNjQ2YQ=="><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/yash-laxman-divekar"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/tech/Rakshit badiger.jpg" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Rakshit Badiger <br> <span>Technical Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/rakshitb_?igsh=MWtmeXgzd3BtYWxncw=="><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/rakshit-badiger-854a73248"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\tech\IMG_20240818_161247 - Manthan Kachare-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Manthan Kachare<br> <span>Technical Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/manthankachare_official"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/manthan-kachare-49689225a"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\tech\IMG_2276 - Janvi Singh-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3> Janvi Singh<br> <span> Technical Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/janvyye "><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/janvi-singh-308b0028a/"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\tech\IMG_20231215_180548 - Neil Landge-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Neil Landge <br> <span> Technical Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/neil_landge?igsh=d3l0cmp2dms4OTBh"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/neillandgepune?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+        
+                <!-- Add more cards as needed -->
+            </div>
+        </section>
+        <section>
+            <h2>Culture Team</h2>
+            <div class="container">
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\cultural\IMG20231025135522 - Sejal Pawar-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Sejal Pawar <br> <span> Cultural Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/sejal_pawar1309?igsh=dXM0a21nb3pwcDRl"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/sejal-pawar-3a71781b3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\cultural\IMG_2716 - Aditi Ghuge-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Aditi Ghughe<br> <span> Cultural Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/aditig_1811?igsh=OGd4ZWRrNHJkbm5l&utm_source=qr"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/aditi-ghuge-424b57291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\cultural\AkankshaP - Akanksha-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Akanksha Patil <br> <span>Cultural Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="http://linkedin.com/in/akankkshapatil"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\cultural\Screenshot_2024-08-16-22-41-05-60_254de13a4bc8758c9908fff1f73e3725 - Mihir Sonawane-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Mihir Sonwane<br> <span> Cultural Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\cultural\IMG-20240819-WA0001 - Manisha Wagh-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Mohit Wagh<br> <span> Cultural Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\cultural\IMG_20240819_155701 - Aishwarya Mutha-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Aishwarya Mutha<br> <span> Cultural Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+        
+                <!-- Add more cards as needed -->
+            </div>
+        </section>
+            
+            <section>
+            <h2>Sports Team</h2>
+            <div class="container">
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/New folder/IMG_4255 - Manali Gawade-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Manali Gawade <br> <span> Sports Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/manale00y._?igsh=MWNzeHlqYWlhYTB3eg=="><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/manali-gawade-59009a292/"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\New folder\IMG-20240820-WA0025 - Aditya Kokate-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Aditya Kokate<br> <span> Sports Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/adit_loll?igsh=cmQybjY0dXI5NmRz"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/aditya-kokate-6654b4248"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\New folder\IMG_20240823_134303 - sanket chopade-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Sanket Chopade <br> <span> Sports Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+        
+                <!-- Duplicate the card as needed -->
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\New folder\IMG_20240820_202045 - Shk_ Arsalan-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Arsalan Shaikh<br> <span> Sports Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/shkarslan5_?igsh=MTUwZmtkb3RnZGdr"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/shaikh-arsalan-221b97280?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/New folder/pooja.jpg" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Pooja Thorat<br> <span> Sports Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images/pics/New folder/sakshi adam.jpg" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Sakshi Kadam<br> <span>Sports Head</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/sakshi_kadam1112?igsh=MWJtenNrendpcXdwcw=="><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/sakshi-kadam-827292258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+        
+                <!-- Add more cards as needed -->
+            </div>
+        </section>
+                <!-- Core Team Section -->
+                <section>
+                    <h2>Media Team</h2>
+                    <div class="container">
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\media\7mb - Athrav Pastapure-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Atharva Pastapure<br> <span> Media Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/atharv0003?igsh=MTljMnZqeG8xejViOA=="><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/atharv-pastapure?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\media\IMG_3772 - Sairaj Bhagat-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Sairaj Bhagat <br> <span> Media Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/_sai_bhagat_33_?igsh=MTg2cGtmNzE5MXpiaQ%3D%3D&utm_source=qr"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/sairaj-bhagat-a29969263?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\media\20240419_094929 - Tejas Shende-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Tejas Shende<br> <span> Media Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/tejas_shende_07?igsh=dDU0cHh0NmJ0MTNm"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/tejas-shende-3b118429b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <!-- Duplicate the card as needed -->
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\media\20240817_133447 - Chaitanya Salunke-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3> Chaitanya Salunke <br> <span>Media Head</span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images/pics/media/abhiasha.jpg" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Abhilasha Chavan<br> <span> Media Head</span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\media\IMG_0394 - VEDANT PATIL-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Vedant Patil<br> <span> Media Head</span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <!-- Add more cards as needed -->
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Documentation Team</h2>
+                    <diV class="container">
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\doc\3 - Salma Mulla-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Salma Mulla<br> <span> Documentation Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/salma_sm__31?igsh=bDk0dXBobzlob3h2"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/salma-mulla-0118a5231?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\doc\IMG-20240123-WA0003 - Rutuja Neharkar-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Rutuja Neherkar<br> <span> Documentation Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/_rutuja_n?igsh=MXdjYzM1M2R0eWxrOQ=="><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/rutuja-neharkar-1621b6292"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\doc\82ac53e4-aa41-463f-9e5f-f4457f69dc6e - Sonal Manvar-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Nandini Manvar <br> <span> Documentation Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/nandinii06?igsh=dzl3c3dkejQ1dWdq"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/nandini-manvar-3bba042a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\doc\IMG-20240824-WA0013 - Jay-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Jay Pawar<br> <span>Documentation Head </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/jayy_pawar_?igsh=cTVsYTN3anJlbnFl"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/jay-pawar-4a211b196?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\doc\20240504_153748 - Pallavi Mohite-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Pallavi Mohite <br> <span> Documentation Head </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/pallavi.m05?igsh=MXN5djBlNTR4cXRldg=="><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/pallavi-mohite-355ba82b2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images/pics/doc/doc.jpg alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Shaizan Shaikh <br> <span> Documentation Head </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/shaizz.s?igsh=ejVycnFwczV0amkx"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/shaizan-shaikh-581603319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\doc\IMG_5557 - Sahil-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Sahil Mane <br> <span> Documentation Head </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/sxhilmane?igsh=MXVzeHE4N3p0dGt0bg%3D%3D&utm_source=qr"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </diV>
+                </section>
+
+                <section>
+                    <h2>Discipline Team</h2>
+                    <div class="container">
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\discipline\IMG_20240818_235036 - shreyash TRIMALE-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Shreyash Trimale<br> <span>Discipline Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/ishreyash_?igsh=MWk3dGIxbGhqbTNp"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/shreyash-trimale-1b9767277?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\discipline\IMG_20240819_191028 - Yash Garud-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Yash Garud<br> <span>Discipline Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/yash_garud_0803?igsh=emw0ejJibHIxYTA1"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/yash-garud-5339a3289"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\discipline\20240819_180859 - Ashish Fatke-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Ashish Fatke<br> <span>Discipline Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/ash.25200?igsh=N2l6Zm44ZjFpc2M2"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/ashish-fatke-4411442b3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\discipline\formals me - A-44 Saylee Gokhare-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Saylee Ghokare<br> <span>Discipline Head</span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/saylee_gokhare_26?igsh=ZG1ocXlvZjkyOXJ2"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/saylee-gokhare-708b3923b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\discipline\diya - Diya Ramesh Jain-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Diya Jain<br> <span>Discipline Head</span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/_diya_12_"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/diya-ramesh-jain-4b7200302?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\discipline\Pi7_Tool_IMG_20240819_132119 - Rushikesh Sawant-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Ritesh Bakare<br> <span>Discipline Head</span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/_ritesh_bakare_86?igsh=N3JuOHlsNzR4MTlr"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/ritesh-bakare-040aa0293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images/pics/discipline/sujal.jpg" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Sujal suryawansh<br> <span>Discipline Head</span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        </div></section>
+
+
+
+                <section>
+                    <h2>TnP TEAM</h2>
+                    <div class="container">
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images/pics/tnp/bhujbhal.jpg alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Ayush Bhujbal<br> <span> T&P Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/ayushbhujbal17"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/ayush-bhujbal-0167142a5?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images\pics\tnp\DSC_0936 - Atharv Deshmukh-modified.png" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Atharva Deshmukh<br> <span> T&P Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/_aaatharvvv_04?igsh=MXdrbHdudzZkZHkyeQ=="><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/atharv-deshmukh-7403a9292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="content">
+                                <div class="imgBx">
+                                    <img src="images/pics/tnp/neel.jpg" alt="profile image">
+                                </div>
+                                <div class="contentBox">
+                                    <h3>Neel Munot <br> <span>T&P Secretary </span></h3>
+                                </div>
+                                <ul class="sci">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.instagram.com/neelmunot2003?utm_source=qr&igsh=MXQwNHJ0ZTMza3Nxdw=="><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/neel-munot-965672229/"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Social Team</h2>
+                    <div class="container">
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\social\20220608_122930 - Rajesh Tekawade-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Rajesh Tekawade<br> <span> Social Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/the_rajeshtekawade_007?igsh=NTc4MTIwNjQ2YQ=="><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/rajesh-tekawade-b00696229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\social\Photo - Megha Narwade-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Megha Narwade<br> <span> Social Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/narwadeug?igsh=aTZkbGoxOXRqd2Q3"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/megha-narwade-165353327"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="content">
+                        <div class="imgBx">
+                            <img src="images\pics\social\IMG_20240816_231521 - Kulbhushan Ranaware-modified.png" alt="profile image">
+                        </div>
+                        <div class="contentBox">
+                            <h3>Kulbhushan Ranaware<br> <span> Social Secretary</span></h3>
+                        </div>
+                        <ul class="sci">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/kulbhushanranaware "><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/kulbhushan-ranaware-8b3841284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div></section>
+
+
+            <section>
+                <h2>Year Representatives</h2>
+                <div class="container">
+            <div class="card">
+                <div class="content">
+                    <div class="imgBx">
+                        <img src="images\pics\yr representative\_DSC7869 - Omkar Naiknavare-modified.png" alt="profile image">
+                    </div>
+                    <div class="contentBox">
+                        <h3>Omkar Naiknavare<br> <span>Final Year</span></h3>
+                    </div>
+                    <ul class="sci">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/i.am.omkar14?igsh=MXdjemZ6MDlvbjJhZA=="><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/omkar-naiknavare-b21815239?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="content">
+                    <div class="imgBx">
+                        <img src="images/pics/yr representative/harshad.jpg" alt="profile image">
+                    </div>
+                    <div class="contentBox">
+                        <h3>Harshad Chavan<br> <span>Third Year</span></h3>
+                    </div>
+                    <ul class="sci">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/harshad_1924?igsh=MXRvMXVwMTM2YXByYw%3D%3D&utm_source=qr"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/harshad-chavan-8484b7264?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="content">
+                    <div class="imgBx">
+                        <img src="images/pics/yr representative/IMG_8872 - A-34Prajyot Pravin Fulari-modified.png" alt="profile image">
+                    </div>
+                    <div class="contentBox">
+                        <h3>Prajyot Fulari<br> <span>Second Year</span></h3>
+                    </div>
+                    <ul class="sci">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/Adix_18 "><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/prajyot-fulari-713b3230b"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            </div></section>
+    </main>
+
+    <script src="profile.js"></script>
+
+</body>
+
+</html>
